@@ -1,0 +1,13 @@
+# Diretórios de build do .NET/C#
+bin/
+obj/
+
+# Diretórios comuns do Vue/Node
+node_modules/
+dist/
+
+# Configurações do IDE
+.vscode/
+
+# Pasta do Git
+.git/
