@@ -1,11 +1,17 @@
 <template>
-  <div class="time-range-selector">
-    <div class="selector-label">Período:</div>
-    <div class="range-buttons">
-      <button v-for="range in ranges" :key="range.value" @click="$emit('update:modelValue', range.value)" :class="[
-        'range-button',
-        modelValue === range.value ? 'active' : 'inactive'
-      ]">
+  <div class="time-range-selector luxury-bg luxury-border p-3">
+    <div class="selector-label text-small">PERÍODO:</div>
+    <div class="range-buttons flex gap-2">
+      <button 
+        v-for="range in ranges" 
+        :key="range.value" 
+        @click="$emit('update:modelValue', range.value)" 
+        :class="[
+          'btn',
+          'btn-sm',
+          modelValue === range.value ? 'btn-primary' : 'btn-tertiary'
+        ]"
+      >
         {{ range.label }}
       </button>
     </div>
@@ -34,54 +40,54 @@ defineEmits<{
   display: flex;
   align-items: center;
   gap: 1rem;
-  background-color: var(--color-bg-secondary);
   border-radius: 0;
-  padding: 1rem;
-  border: 1px solid var(--color-border);
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .selector-label {
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: normal;
   color: var(--color-text-primary);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 .range-buttons {
   display: flex;
+  flex-wrap: wrap;
+}
+
+/* Utilitários personalizados */
+.flex {
+  display: flex;
+}
+
+.gap-2 {
   gap: 0.5rem;
 }
 
-.range-button {
-  padding: 0.5rem 1rem;
-  border-radius: 0;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: all 0.2s var(--ease-snappy);
-  border: 1px solid var(--color-border);
-  cursor: pointer;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+/* Responsividade */
+@media (max-width: 768px) {
+  .time-range-selector {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .selector-label {
+    text-align: center;
+  }
+
+  .range-buttons {
+    justify-content: center;
+  }
 }
 
-.range-button.active {
-  background-color: var(--color-gold-300);
-  color: var(--color-bg-primary);
-  border-color: var(--color-gold-300);
-}
-
-.range-button.inactive {
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-secondary);
-  border-color: var(--color-border);
-}
-
-.range-button.inactive:hover {
-  background-color: var(--color-dark-200);
-  color: var(--color-text-primary);
-  border-color: var(--color-gold-300);
+@media (max-width: 480px) {
+  .range-buttons {
+    gap: 0.25rem;
+  }
+  
+  .time-range-selector {
+    padding: 0.75rem;
+  }
 }
 </style>

@@ -1,34 +1,34 @@
 <template>
-  <div class="book-card" :class="`status-${book.status}`">
-    <div class="book-cover relative h-48 flex items-center justify-center text-xl border-b"
-      :class="book.coverUrl ? 'has-image' : 'no-image'">
-      <div class="cover-placeholder text-center font-mono" v-if="!book.coverUrl">
+  <div class="book-card luxury-card luxury-border" :class="`status-${book.status}`">
+    <div class="book-cover relative h-48 flex items-center justify-center text-xl luxury-border-bottom"
+      :class="book.coverUrl ? 'has-image' : 'no-image luxury-bg'">
+      <div class="cover-placeholder text-center font-mono gold-glow" v-if="!book.coverUrl">
         {{book.title.split(' ').map(w => w[0]).join('').toUpperCase()}}
       </div>
       <img v-else :src="book.coverUrl" :alt="book.title" class="cover-image w-full h-full object-cover">
 
-      <div class="book-status absolute top-2 right-2 text-xs uppercase border px-2 py-1 font-mono">
+      <div class="book-status absolute top-2 right-2 text-xs uppercase luxury-border px-2 py-1 font-mono luxury-bg">
         {{ statusLabel }}
       </div>
     </div>
 
     <div class="book-content p-4">
-      <h3 class="book-title text-xl font-mono mb-2 leading-tight">{{ book.title }}</h3>
-      <p class="book-author text-base italic mb-4">{{ book.author }}</p>
-      <p class="book-description text-sm leading-relaxed mb-4 line-clamp-3">
+      <h3 class="book-title h4 mb-2 gold-glow">{{ book.title }}</h3>
+      <p class="book-author text-small italic mb-3">{{ book.author }}</p>
+      <p class="book-description text-small leading-relaxed mb-4 line-clamp-3">
         {{ book.description }}
       </p>
 
-      <div class="book-meta flex justify-between items-center mb-4 text-sm">
+      <div class="book-meta flex justify-between items-center mb-4 text-small">
         <span class="pages">{{ book.pages }} PÁGINAS</span>
-        <span class="rating" v-if="book.rating">
+        <span class="rating gold-gradient" v-if="book.rating">
           ⭐ {{ book.rating }}/5
         </span>
       </div>
 
       <div class="book-categories flex flex-wrap gap-1 mb-4">
         <span v-for="category in book.categories" :key="category"
-          class="category-tag text-xs px-2 py-1 border font-mono">
+          class="category-tag text-xsmall px-2 py-1 luxury-border luxury-bg font-mono">
           {{ category }}
         </span>
       </div>
@@ -62,17 +62,18 @@ const statusLabel = computed(() => statusLabels[props.book.status])
 <style scoped>
 .book-card {
   background: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
   overflow: hidden;
-  font-family: var(--font-mono);
+  font-family: 'PPMondwest', monospace;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   transition: all 0.2s var(--ease-snappy);
+  border-radius: 0;
 }
 
 .book-card:hover {
   border-color: var(--color-gold-300);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 219, 137, 0.1);
 }
 
 .line-clamp-3 {
@@ -139,7 +140,6 @@ const statusLabel = computed(() => statusLabels[props.book.status])
 }
 
 .book-meta .rating {
-  color: var(--color-gold-300);
   letter-spacing: 0.5px;
 }
 
@@ -162,5 +162,110 @@ const statusLabel = computed(() => statusLabels[props.book.status])
 
 .book-card.status-to-read {
   border-left: 3px solid var(--color-gold-700);
+}
+
+/* Utilitários personalizados */
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.top-2 {
+  top: 0.5rem;
+}
+
+.right-2 {
+  right: 0.5rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-48 {
+  height: 12rem;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.gap-1 {
+  gap: 0.25rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.leading-tight {
+  line-height: 1.25;
+}
+
+.leading-relaxed {
+  line-height: 1.625;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.object-cover {
+  object-fit: cover;
+}
+
+/* Aplicar fonte quando carregada */
+.fonts-loaded .book-card {
+  font-family: 'PPMondwest', monospace !important;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .book-content {
+    padding: 0.75rem;
+  }
+
+  .h-48 {
+    height: 10rem;
+  }
+
+  .text-xl {
+    font-size: 1.125rem;
+  }
 }
 </style>

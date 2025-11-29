@@ -1,17 +1,18 @@
 <template>
-  <div class="posts-grid">
-    <div class="grid-container">
+  <div class="posts-grid luxury-terminal">
+    <div class="grid-container grid grid-3 gap-4">
       <PostCard v-for="post in posts" :key="post.id" :post="post" />
     </div>
 
     <!-- Loading State -->
-    <div v-if="loading" class="loading-state">
-      <p>Carregando postagens...</p>
+    <div v-if="loading" class="loading-state luxury-bg luxury-border p-6 text-center mt-4">
+      <p class="text-small gold-glow">CARREGANDO POSTAGENS...</p>
     </div>
 
     <!-- Empty State -->
-    <div v-if="!loading && posts.length === 0" class="empty-state">
-      <p>Nenhuma postagem encontrada.</p>
+    <div v-else-if="posts.length === 0" class="empty-state luxury-card luxury-border text-center p-6 mt-4">
+      <p class="h5 gold-gradient">NENHUMA POSTAGEM ENCONTRADA.</p>
+      <p class="text-small mt-2">Tente ajustar os filtros ou verificar novamente mais tarde.</p>
     </div>
   </div>
 </template>
@@ -39,35 +40,45 @@ defineProps<Props>()
 
 <style scoped>
 .posts-grid {
-  font-family: var(--font-mono);
+  font-family: 'PPMondwest', monospace;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
 }
 
 .loading-state {
-  text-align: center;
-  padding: 2rem;
-  color: var(--color-text-secondary);
+  border-radius: 0;
+  transition: all 0.2s var(--ease-snappy);
 }
 
 .empty-state {
-  text-align: center;
-  padding: 3rem;
-  color: var(--color-text-secondary);
-  border: 1px solid var(--color-border);
-  background: var(--color-bg-secondary);
+  border-radius: 0;
+  transition: all 0.2s var(--ease-snappy);
 }
 
 .empty-state p {
-  font-size: 1.125rem;
   margin: 0;
   letter-spacing: 0.5px;
+}
+
+/* Utilitários personalizados */
+.text-center {
+  text-align: center;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
 }
 
 /* Responsividade */
@@ -78,8 +89,8 @@ defineProps<Props>()
   }
 
   .empty-state {
-    padding: 2rem;
-    margin: 0 1rem;
+    padding: 1rem;
+    margin: 0;
   }
 
   .empty-state p {
@@ -95,8 +106,17 @@ defineProps<Props>()
 
 @media (min-width: 1200px) {
   .grid-container {
-    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
+}
+
+/* Ajuste para grid responsiva automática */
+.grid.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* Aplicar fonte quando carregada */
+.fonts-loaded .posts-grid {
+  font-family: 'PPMondwest', monospace !important;
 }
 </style>

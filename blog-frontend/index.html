@@ -1,13 +1,72 @@
 <!DOCTYPE html>
-<html lang="">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Preload para melhor performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <title>Blog Frontend</title>
+
+  <!-- Meta tags para SEO -->
+  <meta name="description" content="Blog moderno com design luxury e tipografia exclusiva">
+  <meta name="theme-color" content="#ffdb89">
+
+  <style>
+    /* Loading inicial para evitar FOUC (Flash of Unstyled Content) */
+    body {
+      background-color: #030303;
+      margin: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    body.loaded {
+      opacity: 1;
+    }
+
+    /* Fallback para enquanto as fontes carregam */
+    .loading-text {
+      font-family: 'Courier New', monospace;
+      color: #ffdb89;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- Conteúdo inicial de loading -->
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; text-transform: uppercase;"
+      class="loading-text">
+      <div style="text-align: center;">
+        <div style="font-size: 1.5rem; margin-bottom: 1rem;">Carregando...</div>
+        <div style="border: 1px solid #444; padding: 2rem; background: #2c2c2e;">
+          Blog Frontend
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+
+  <script>
+    // Adiciona classe loaded quando a página carrega
+    window.addEventListener('load', function () {
+      document.body.classList.add('loaded');
+    });
+
+    // Fallback caso o load não dispare
+    setTimeout(function () {
+      document.body.classList.add('loaded');
+    }, 1000);
+  </script>
+</body>
+
 </html>

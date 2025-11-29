@@ -61,7 +61,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import BookCard from './components/BookCard.vue'
+import BookCard from '@/pages/Acervo/components/BookCard.vue'
 import { mockBooks } from '@/data/mockBooksData'
 import type { Book, BookFilters } from '@/types/books'
 

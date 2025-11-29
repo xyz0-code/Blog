@@ -1,23 +1,23 @@
 <template>
-  <div class="category-legend">
-    <h4 class="legend-title">Legenda de Categorias</h4>
+  <div class="category-legend luxury-card">
+    <h4 class="legend-title h5 gold-glow mb-3">LEGENDA DE CATEGORIAS</h4>
 
-    <div class="categories-list">
-      <div v-for="category in categories" :key="category.id" class="category-item">
-        <div class="color-sample" :style="{ backgroundColor: category.color }"></div>
+    <div class="categories-list grid grid-2 gap-3 mb-4">
+      <div v-for="category in categories" :key="category.id" class="category-item luxury-bg luxury-border p-3">
+        <div class="color-sample luxury-border" :style="{ backgroundColor: category.color }"></div>
         <div class="category-info">
-          <span class="category-name">{{ category.name }}</span>
-          <span class="category-desc">{{ category.description }}</span>
+          <span class="category-name text-small">{{ category.name }}</span>
+          <span class="category-desc text-xsmall">{{ category.description }}</span>
         </div>
       </div>
     </div>
 
-    <div class="volume-legend">
-      <h5 class="volume-title">Intensidade por Volume:</h5>
-      <div class="volume-levels">
-        <div v-for="level in volumeLevels" :key="level.value" class="volume-item">
-          <div class="volume-sample" :class="`level-${level.value}`"></div>
-          <span class="volume-desc">{{ level.label }}</span>
+    <div class="volume-legend luxury-border-top pt-4">
+      <h5 class="volume-title h6 mb-3">INTENSIDADE POR VOLUME:</h5>
+      <div class="volume-levels grid grid-3 gap-2">
+        <div v-for="level in volumeLevels" :key="level.value" class="volume-item flex items-center gap-2">
+          <div class="volume-sample luxury-border" :class="`level-${level.value}`"></div>
+          <span class="volume-desc text-xsmall">{{ level.label }}</span>
         </div>
       </div>
     </div>
@@ -34,44 +34,40 @@ interface Props {
 defineProps<Props>()
 
 const volumeLevels = [
-  { value: 1, label: '100-500 chars' },
-  { value: 2, label: '500-2K chars' },
-  { value: 3, label: '2K-5K chars' },
-  { value: 4, label: '5K-10K chars' },
-  { value: 5, label: '10K+ chars' }
+  { value: 1, label: '100-500 CHARS' },
+  { value: 2, label: '500-2K CHARS' },
+  { value: 3, label: '2K-5K CHARS' },
+  { value: 4, label: '5K-10K CHARS' },
+  { value: 5, label: '10K+ CHARS' }
 ]
 </script>
 
 <style scoped>
 .category-legend {
-  background-color: #ffffff;
+  background-color: var(--color-bg-secondary);
   border-radius: 0;
-  border: 1px solid #cccccc;
-  padding: 1rem;
-  font-family: var(--font-sans);
 }
 
 .legend-title {
-  font-size: 0.875rem;
   font-weight: normal;
-  color: #222222;
-  margin-bottom: 0.75rem;
-  font-family: var(--font-serif);
-  border-bottom: 1px solid #cccccc;
-  padding-bottom: 0.5rem;
+  color: var(--color-text-primary);
+  letter-spacing: 0.5px;
 }
 
 .categories-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  display: grid;
 }
 
 .category-item {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.25rem 0;
+  transition: all 0.2s var(--ease-snappy);
+}
+
+.category-item:hover {
+  border-color: var(--color-gold-300) !important;
+  transform: translateY(-1px);
 }
 
 .color-sample {
@@ -79,80 +75,125 @@ const volumeLevels = [
   height: 1rem;
   border-radius: 0;
   flex-shrink: 0;
-  border: 1px solid #cccccc;
 }
 
 .category-info {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .category-name {
-  font-size: 0.875rem;
   font-weight: normal;
-  color: #222222;
+  color: var(--color-text-primary);
+  letter-spacing: 0.5px;
+  margin-bottom: 0.125rem;
 }
 
 .category-desc {
-  font-size: 0.75rem;
-  color: #666666;
+  color: var(--color-text-secondary);
+  line-height: 1.3;
 }
 
 .volume-legend {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid var(--color-border);
 }
 
 .volume-title {
-  font-size: 0.875rem;
   font-weight: normal;
-  color: #222222;
-  margin-bottom: 0.5rem;
-  font-family: var(--font-serif);
+  color: var(--color-text-primary);
+  letter-spacing: 0.5px;
 }
 
 .volume-levels {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem;
 }
 
 .volume-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
 }
 
 .volume-sample {
   width: 0.75rem;
   height: 0.75rem;
   border-radius: 0;
-  border: 1px solid #cccccc;
+  background-color: var(--color-gold-300);
 }
 
 .volume-sample.level-1 {
-  background-color: #f0f0f0;
+  opacity: 0.3;
 }
 
 .volume-sample.level-2 {
-  background-color: #d0d0d0;
+  opacity: 0.45;
 }
 
 .volume-sample.level-3 {
-  background-color: #b0b0b0;
+  opacity: 0.6;
 }
 
 .volume-sample.level-4 {
-  background-color: #909090;
+  opacity: 0.75;
 }
 
 .volume-sample.level-5 {
-  background-color: #707070;
+  opacity: 0.9;
 }
 
 .volume-desc {
-  font-size: 0.75rem;
-  color: #666666;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.5px;
+}
+
+/* Utilitários personalizados */
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.gap-3 {
+  gap: 0.75rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .categories-list {
+    grid-template-columns: 1fr;
+  }
+
+  .volume-levels {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .category-item {
+    padding: 0.75rem;
+  }
+
+  .color-sample {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .volume-levels {
+    grid-template-columns: 1fr;
+  }
+
+  .category-name {
+    font-size: 0.875rem;
+  }
+
+  .category-desc {
+    font-size: 0.7rem;
+  }
 }
 </style>

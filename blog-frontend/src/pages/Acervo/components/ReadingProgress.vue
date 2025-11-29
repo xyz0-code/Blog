@@ -1,15 +1,15 @@
 <template>
-  <div class="reading-progress">
+  <div class="reading-progress luxury-bg luxury-border p-3">
     <div class="progress-header flex justify-between items-center mb-2">
-      <span class="progress-label">PROGRESSO</span>
-      <span class="progress-percentage">{{ progress }}%</span>
+      <span class="progress-label text-xsmall">PROGRESSO</span>
+      <span class="progress-percentage text-xsmall gold-gradient">{{ progress }}%</span>
     </div>
 
-    <div class="progress-bar overflow-hidden mb-2">
+    <div class="progress-bar luxury-border overflow-hidden mb-2">
       <div class="progress-fill h-full" :style="{ width: `${progress}%` }"></div>
     </div>
 
-    <div class="progress-details text-center">
+    <div class="progress-details text-center text-xsmall">
       <span>PÁGINA {{ currentPage }} DE {{ totalPages }}</span>
     </div>
   </div>
@@ -28,11 +28,11 @@ defineProps<Props>()
 <style scoped>
 .reading-progress {
   background: var(--color-bg-secondary);
-  padding: 1rem;
-  border: 1px solid var(--color-border);
-  font-family: var(--font-mono);
+  font-family: 'PPMondwest', monospace;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  border-radius: 0;
+  transition: all 0.2s var(--ease-snappy);
 }
 
 .progress-header {
@@ -40,16 +40,12 @@ defineProps<Props>()
 }
 
 .progress-label {
-  font-size: 0.75rem;
   color: var(--color-text-primary);
   letter-spacing: 0.5px;
 }
 
 .progress-percentage {
-  font-size: 0.75rem;
-  color: var(--color-gold-300);
   letter-spacing: 0.5px;
-  font-weight: bold;
 }
 
 .progress-bar {
@@ -64,9 +60,41 @@ defineProps<Props>()
 }
 
 .progress-details {
-  font-size: 0.625rem;
   color: var(--color-text-secondary);
   letter-spacing: 0.5px;
+}
+
+/* Utilitários personalizados */
+.flex {
+  display: flex;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 /* Estilos para diferentes estados de progresso */
@@ -77,5 +105,43 @@ defineProps<Props>()
 .progress-fill[style*="width: 100%"] {
   background-color: var(--color-gold-300);
   box-shadow: 0 0 5px var(--color-gold-300);
+}
+
+/* Efeitos de hover para interatividade */
+.reading-progress:hover {
+  border-color: var(--color-gold-300);
+}
+
+.reading-progress:hover .progress-fill {
+  box-shadow: 0 0 3px var(--color-gold-200);
+}
+
+/* Aplicar fonte quando carregada */
+.fonts-loaded .reading-progress {
+  font-family: 'PPMondwest', monospace !important;
+}
+
+/* Estados de progresso intermediários com cores diferentes */
+.progress-fill[style*="width: 25%"] {
+  background-color: var(--color-gold-600);
+}
+
+.progress-fill[style*="width: 50%"] {
+  background-color: var(--color-gold-500);
+}
+
+.progress-fill[style*="width: 75%"] {
+  background-color: var(--color-gold-400);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .reading-progress {
+    padding: 0.5rem;
+  }
+  
+  .progress-bar {
+    height: 3px;
+  }
 }
 </style>
